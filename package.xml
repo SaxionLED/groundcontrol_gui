@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package>
+  <name>groundcontrol_gui</name>
+  <version>0.0.0</version>
+  <description>The x80sv control package</description>
+  <license>BSD</license>
+  <maintainer email="windel.bouwman@gmail.com">Windel Bouwman</maintainer>
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>x80sv_simulation</run_depend>
+</package>

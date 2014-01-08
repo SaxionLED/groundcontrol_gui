@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find x80sv_simulation)/launch/x80sv_testarea.launch" />
+  <include file="$(find groundcontrol_gui)/launch/robot_control.launch" />
+</launch>
