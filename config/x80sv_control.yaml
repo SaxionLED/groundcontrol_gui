@@ -1,0 +1,10 @@
+
+x80sv:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 10
+
+  left_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_wheel_as
+    pid: {p: 100.0, i: 0.01, d: .01}
