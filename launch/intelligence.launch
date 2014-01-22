@@ -1,0 +1,5 @@
+<launch>
+
+<node name="control_node1" pkg="groundcontrol_gui" type="control_node.py"/>
+
+</launch>
