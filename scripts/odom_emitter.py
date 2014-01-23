@@ -47,15 +47,26 @@ class OdomEmitter:
         odom_quat = tf.transformations.quaternion_from_euler(0.0, 0.0, self.th)
 
         # Send transform:
-        self.odom_broadcaster.sendTransform((self.x, self.y, 0), odom_quat, nu, "odom", "map")
+        self.odom_broadcaster.sendTransform((self.x, self.y, 0.0), odom_quat, nu, "base_link", "odom")
 
         # Send odom message:
         msg = Odometry()
         msg.header.stamp = nu
-        msg.header.frame_id = '/odom'
-        msg.child_frame_id = '/chassis'
+        msg.header.frame_id = 'odom'
+        msg.pose.pose.position.x = self.x
+        msg.pose.pose.position.y = self.y
+        msg.pose.pose.position.z = 0.0
+        msg.pose.pose.orientation.x = odom_quat[0]
+        msg.pose.pose.orientation.y = odom_quat[1]
+        msg.pose.pose.orientation.z = odom_quat[2]
+        msg.pose.pose.orientation.w = odom_quat[3]
+        msg.child_frame_id = 'base_link'
+        msg.twist.twist.linear.x = vx
+        msg.twist.twist.linear.y = vy
+        msg.twist.twist.angular.z = vth
 
-        self.odom.publish(msg)
+
+        #self.odom.publish(msg)
 
     def run(self):
         rospy.spin()
