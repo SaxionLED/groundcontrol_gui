@@ -8,6 +8,7 @@ Panels:
         - /Odometry1
         - /Map1
         - /Map1/Status1
+        - /TF1
       Splitter Ratio: 0.345178
     Tree Height: 817
   - Class: rviz/Selection
@@ -53,59 +54,29 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        laser_scanner:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        zwenk_wiel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        zwenk_wiel_flens:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Keep: 40
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /odom
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -139,16 +110,57 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Map
       Topic: /map
-      Value: true
+      Value: false
     - Class: rviz/Axes
       Enabled: true
       Length: 1
       Name: Axes
       Radius: 0.1
       Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_link:
+          Value: true
+        laser_scanner:
+          Value: true
+        left_wheel:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+        right_wheel:
+          Value: true
+        zwenk_wiel:
+          Value: true
+        zwenk_wiel_flens:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        map:
+          odom:
+            base_link:
+              laser_scanner:
+                {}
+              left_wheel:
+                {}
+              right_wheel:
+                {}
+              zwenk_wiel_flens:
+                zwenk_wiel:
+                  {}
+      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
@@ -174,17 +186,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 19.0431
+      Distance: 10.0513
       Focal Point:
         X: 0
         Y: 0
         Z: 0
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.694797
+      Pitch: 0.684797
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.4754
+      Yaw: 5.0854
     Saved: ~
 Window Geometry:
   Displays:

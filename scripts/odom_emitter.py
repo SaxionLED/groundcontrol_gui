@@ -41,7 +41,7 @@ class OdomEmitter:
         # calculate velocities:
         vy = 0.0 # We cannot move instant sideways
         vx = (v_l + v_r) / 2.0   # Average left and right velocities
-        vth = (v_r - v_l) / (self.wheel_base / 2.0) # Rotation
+        vth = (v_r - v_l) / (self.wheel_base) # Rotation
 
         # Integrate:
         delta_x = (vx * math.cos(self.th) - vy * math.sin(self.th)) * dt
