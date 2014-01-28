@@ -3,18 +3,10 @@
 <launch>
 
   <rosparam file="$(find groundcontrol_gui)/config/x80sv_control.yaml" command="load"/>
-<!--
-<node name="control_node1" pkg="groundcontrol_gui" type="control_node.py"/>
--->
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-
-<!--
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find groundcontrol_gui)/view.rviz"
-     required="true" />
--->
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/x80sv" args="left_controller right_controller joint_state_controller" />

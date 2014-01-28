@@ -16,23 +16,32 @@ class OdomEmitter:
         self.odom = rospy.Publisher('/odom', Odometry)
         self.odom_broadcaster = tf.TransformBroadcaster()
         rospy.Subscriber('/x80sv/joint_states', JointState, self.handle_joint_states)
-        self.wheel_base = 0.4
+        self.wheel_base = 0.2
+        self.wheel_radius = 0.05
         self.th = 0.0
         self.x = 0.0
         self.y = 0.0
+        self.prev_time = None
 
     def handle_joint_states(self, states):
         # Extract left and right velocities and emit odometry based on these facts.
-        v_l, v_r = states.velocity[0], states.velocity[1]
+        v_l = states.velocity[0] * self.wheel_radius
+        v_r = states.velocity[1] * self.wheel_radius
         self.emit(v_l, v_r)
 
     def emit(self, v_l, v_r):
+        """ Emit pose of base_link in odom frame """
         nu = rospy.Time.now()
-        dt = 0.1
+        if self.prev_time is None:
+            self.prev_time = nu
+            return
+        dt = nu - self.prev_time
+        self.prev_time = nu
+        dt = dt.to_sec()   # Convert to floating point
         # calculate velocities:
-        vx = 0.0 # We cannot move instant sideways
-        vy = v_l + v_r
-        vth = (v_l - v_r) / (self.wheel_base / 2.0) # Rotation
+        vy = 0.0 # We cannot move instant sideways
+        vx = (v_l + v_r) / 2.0   # Average left and right velocities
+        vth = (v_r - v_l) / (self.wheel_base / 2.0) # Rotation
 
         # Integrate:
         delta_x = (vx * math.cos(self.th) - vy * math.sin(self.th)) * dt
@@ -65,8 +74,7 @@ class OdomEmitter:
         msg.twist.twist.linear.y = vy
         msg.twist.twist.angular.z = vth
 
-
-        #self.odom.publish(msg)
+        self.odom.publish(msg)
 
     def run(self):
         rospy.spin()
